@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e311c0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ebf3f9; /* White background for the card */
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(247, 3, 3, 0.1);
+            padding: 30px;
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            color: #f43a07; /* Dark gray for the title */
+        }
+        input[type="date"] {
+            padding: 10px;
+            border: 1px solid #b1e210;
+            border-radius: 5px;
+            width: 100%;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #0fe459; /* Bootstrap primary color */
+            color: rgb(30, 61, 220);
+            border: none;
+            padding: 10px;s
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #050e17; /* Darker blue on hover */
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #140404; /* Medium gray for the result */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <label for="dob">Enter your Date of Birth:</label>
+        <input type="date" id="dob" required>
+        <button onclick="calculateAge()">Calculate Age</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const dobInput = document.getElementById('dob').value;
+            if (!dobInput) {
+                document.getElementById('result').innerText = "Please enter a valid date of birth.";
+                return;
+            }
+
+            const dob = new Date(dobInput);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDifference = today.getMonth() - dob.getMonth();
+
+            // Adjust age if the birthday hasn't occurred yet this year
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+
+            document.getElementById('result').innerText = `Your age is: ${age} years`;
+        }
+    </script>
+
+</body>
+</html>
